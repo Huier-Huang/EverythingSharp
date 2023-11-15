@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EverythingSharp
 {
-    public abstract class EverythingBase
+    public abstract class EverythingBase : Base
     {
         [DllImport("Everything32.dll", CharSet = CharSet.Unicode)]
         public static extern int Everything_SetSearch(string lpSearchString);

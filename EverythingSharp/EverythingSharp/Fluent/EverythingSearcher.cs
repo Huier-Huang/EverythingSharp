@@ -7,7 +7,7 @@ using EverythingSharp.Extensions;
 
 namespace EverythingSharp.Fluent
 {
-    public class EverythingSearcher : EverythingBase, IDisposable
+    public abstract class EverythingSearcher : EverythingBase
     {
         public EverythingSearchOptions SearchFor(string query)
         {
@@ -99,7 +99,7 @@ namespace EverythingSharp.Fluent
             return Everything_GetRunCountFromFileName(path);
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             Everything_CleanUp();
         }

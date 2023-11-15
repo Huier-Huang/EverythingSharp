@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using EverythingSharp.Enums;
 using EverythingSharp.Exceptions;
 using EverythingSharp.Extensions;
 
 namespace EverythingSharp
 {
-    public class Everything : EverythingBase, IDisposable
+    public class Everything : EverythingBase
     {
         /// <summary>
         /// Performs a search for the specified query and sorts the results.
@@ -20,7 +16,7 @@ namespace EverythingSharp
         /// <param name="requestFlags">The fields to return.</param>
         /// <exception cref="EverythingException">Thrown if the search is unsuccessful.</exception>
         /// <returns>The results of the search.</returns>
-        public IEnumerable<EverythingResult> Search(string query, int maxResults = -1, int offset = -1, Sort sort = Sort.NameAscending, RequestFlags requestFlags = RequestFlags.FullPathAndFileName)
+        public override IEnumerable<EverythingResult> Search(string query, int maxResults = -1, int offset = -1, Sort sort = Sort.NameAscending, RequestFlags requestFlags = RequestFlags.FullPathAndFileName)
         {
             Everything_SetSearch(query);
             Everything_SetSort((uint) sort);
@@ -73,12 +69,12 @@ namespace EverythingSharp
         /// </summary>
         /// <param name="result">The search result to increase the run counter for.</param>
         /// <returns>The new run count.</returns>
-        public uint IncrementRunCount(EverythingResult result)
+        public override uint IncrementRunCount(EverythingResult result)
         {
             return Everything_IncRunCountFromFileName(result.FullPath);
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             Everything_CleanUp();
         }
