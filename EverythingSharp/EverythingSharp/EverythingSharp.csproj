@@ -8,5 +8,7 @@
         <Version>1.0.0</Version>
         <Authors>MengChu</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageProjectUrl>https://github.com/Huier-Huang/EverythingSharp</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 </Project>
