@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EverythingSharp.Enums;
+﻿using EverythingSharp.Enums;
 
-namespace EverythingSharp.Exceptions
+namespace EverythingSharp.Exceptions;
+
+public class EverythingException : Exception
 {
-    public class EverythingException : Exception
+    public EverythingException(Error errorCode, string message) : base(message)
     {
-        public Error ErrorCode { get; }
-
-        public EverythingException(Error errorCode, string message) : base(message)
-        {
-            ErrorCode = errorCode;
-        }
+        ErrorCode = errorCode;
     }
+
+    public Error ErrorCode { get; }
 }

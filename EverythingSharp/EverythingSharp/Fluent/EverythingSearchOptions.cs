@@ -1,63 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EverythingSharp.Enums;
+﻿using EverythingSharp.Enums;
 
-namespace EverythingSharp.Fluent
+namespace EverythingSharp.Fluent;
+
+public class EverythingSearchOptions
 {
-    public class EverythingSearchOptions
+    private readonly EverythingSearcher _searcher;
+
+    internal EverythingSearchOptions(EverythingSearcher searcher)
     {
-        private EverythingSearcher _searcher;
+        _searcher = searcher;
 
-        internal string Query { get; set; }
-        internal uint? MaxResults { get; set; }
-        internal uint? Offset { get; set; }
-        internal Sort Sort { get; set; }
-        internal RequestFlags Flags { get; set; }
+        Sort = Sort.NameAscending;
+        Flags = RequestFlags.FullPathAndFileName;
+    }
 
-        internal EverythingSearchOptions(EverythingSearcher searcher)
-        {
-            _searcher = searcher;
+    internal string Query { get; set; }
+    internal uint? MaxResults { get; set; }
+    internal uint? Offset { get; set; }
+    internal Sort Sort { get; set; }
+    internal RequestFlags Flags { get; set; }
 
-            Sort = Sort.NameAscending;
-            Flags = RequestFlags.FullPathAndFileName;
-        }
+    internal EverythingSearchOptions SetQuery(string query)
+    {
+        Query = query;
+        return this;
+    }
 
-        internal EverythingSearchOptions SetQuery(string query)
-        {
-            Query = query;
-            return this;
-        }
+    public EverythingSearchOptions WithResultLimit(uint max)
+    {
+        MaxResults = max;
+        return this;
+    }
 
-        public EverythingSearchOptions WithResultLimit(uint max)
-        {
-            MaxResults = max;
-            return this;
-        }
+    public EverythingSearchOptions WithOffset(uint offset)
+    {
+        Offset = offset;
+        return this;
+    }
 
-        public EverythingSearchOptions WithOffset(uint offset)
-        {
-            Offset = offset;
-            return this;
-        }
+    public EverythingSearchOptions OrderBy(Sort sort)
+    {
+        Sort = sort;
+        return this;
+    }
 
-        public EverythingSearchOptions OrderBy(Sort sort)
-        {
-            Sort = sort;
-            return this;
-        }
+    public EverythingSearchOptions GetFields(RequestFlags requestedFields)
+    {
+        Flags = requestedFields;
+        return this;
+    }
 
-        public EverythingSearchOptions GetFields(RequestFlags requestedFields)
-        {
-            Flags = requestedFields;
-            return this;
-        }
-
-        public IEnumerable<EverythingEntry> Execute()
-        {
-            return _searcher.Execute(this);
-        }
+    public IEnumerable<EverythingEntry> Execute()
+    {
+        return _searcher.Execute(this);
     }
 }

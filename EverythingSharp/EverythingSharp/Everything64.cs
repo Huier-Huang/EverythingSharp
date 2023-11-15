@@ -5,21 +5,19 @@ namespace EverythingSharp;
 
 public class Everything64 : EverythingBase64
 {
-    public override IEnumerable<EverythingResult> Search(string query, int maxResults = -1, int offset = -1, Sort sort = Sort.NameAscending, RequestFlags requestFlags = RequestFlags.FullPathAndFileName)
+    public override IEnumerable<EverythingResult> Search(string query, int maxResults = -1, int offset = -1,
+        Sort sort = Sort.NameAscending, RequestFlags requestFlags = RequestFlags.FullPathAndFileName)
     {
         Everything_SetSearchW(query);
-        Everything_SetSort((uint) sort);
-        Everything_SetRequestFlags((uint) requestFlags);
-        if(maxResults > -1)
-            Everything_SetMax((uint) maxResults);
-        if(offset > -1)
-            Everything_SetOffset((uint) offset);
+        Everything_SetSort((uint)sort);
+        Everything_SetRequestFlags((uint)requestFlags);
+        if (maxResults > -1)
+            Everything_SetMax((uint)maxResults);
+        if (offset > -1)
+            Everything_SetOffset((uint)offset);
 
         var success = Everything_QueryW(true);
-        if (!success)
-        {
-            throw new Exception();
-        }
+        if (!success) throw new Exception();
 
         const int fileAndPathSize = 260;
         var fileAndPathBuffer = new StringBuilder(fileAndPathSize);
@@ -41,11 +39,11 @@ public class Everything64 : EverythingBase64
             {
                 Size = size,
                 FullPath = fileAndPathBuffer.ToString(),
-                DateCreated = dateCreated > 0 ? DateTime.FromFileTime(dateCreated) : (DateTime?) null, 
-                DateAccessed = dateAccessed > 0 ? DateTime.FromFileTime(dateAccessed) : (DateTime?) null,
-                DateModified = dateModified > 0 ? DateTime.FromFileTime(dateModified) : (DateTime?) null,
-                DateRecentlyChanged = dateRecentlyChanged > 0 ? DateTime.FromFileTime(dateRecentlyChanged) : (DateTime?) null,
-                DateRun = dateRun > 0 ? DateTime.FromFileTime(dateRun) : (DateTime?) null,
+                DateCreated = dateCreated > 0 ? DateTime.FromFileTime(dateCreated) : null,
+                DateAccessed = dateAccessed > 0 ? DateTime.FromFileTime(dateAccessed) : null,
+                DateModified = dateModified > 0 ? DateTime.FromFileTime(dateModified) : null,
+                DateRecentlyChanged = dateRecentlyChanged > 0 ? DateTime.FromFileTime(dateRecentlyChanged) : null,
+                DateRun = dateRun > 0 ? DateTime.FromFileTime(dateRun) : null,
                 RunCount = Everything_GetResultRunCount(index),
                 Attributes = Everything_GetResultAttributes(index)
             };

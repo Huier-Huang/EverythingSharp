@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EverythingSharp.Enums;
 
-namespace EverythingSharp.Enums
+public enum EntryType
 {
-    public enum EntryType
-    {
-        File,
-        Folder,
-        Volume
-    }
+    File,
+    Folder,
+    Volume
 }
