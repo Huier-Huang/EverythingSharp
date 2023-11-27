@@ -5,10 +5,15 @@
         <Nullable>enable</Nullable>
         <RootNamespace>EverythingSharp</RootNamespace>
         <PackageId>EverythingSharp.MengChu</PackageId>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <Authors>MengChu</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageProjectUrl>https://github.com/Huier-Huang/EverythingSharp</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <Content Include="./DLL/Everything32.dll"/>
+        <Content Include="./DLL/Everything64.dll"/>
+    </ItemGroup>
 </Project>
